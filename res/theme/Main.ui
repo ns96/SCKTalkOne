@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="Form" name="Main" cloudDestinationProperty="Main" layout="BorderLayout" borderLayoutAbsoluteCenter="false" title="SCKTalkOne v1.0.5 (3/25/2023)" >
+  <component type="Container" name="Container1" cloudDestinationProperty="Container1" focusable="true" enabled="true" layout="BoxLayout" boxLayoutAxis="Y" >
+    <layoutConstraint value="North" />
+    <component type="Picker" name="btPicker" cloudDestinationProperty="Picker" text="Bluetooth Device Address" >
+    </component>
+    <component type="Button" name="connectButton" cloudDestinationProperty="Button" text="CONNECT" >
+    </component>
+    <component type="Container" name="Container6" cloudDestinationProperty="Container6" layout="GridLayout" gridLayoutRows="1" gridLayoutColumns="2" >
+      <component type="RadioButton" name="sck300RadioButton" cloudDestinationProperty="sck300RadioButton" text="SCK-300" group="sckGroup" >
+      </component>
+      <component type="RadioButton" name="sck300PRadioButton" cloudDestinationProperty="sck300PRadioButton" text="SCK-300P" group="sckGroup" selected="true" >
+      </component>
+    </component>
+    <component type="TextArea" name="consoleTextArea" cloudBoundProperty="text" cloudDestinationProperty="consoleTextArea" text="Status ..." editable="false" rows="2" >
+    </component>
+  </component>
+  <component type="Container" name="Container" cloudDestinationProperty="Container" layout="BoxLayout" boxLayoutAxis="Y" >
+    <layoutConstraint value="South" />
+    <component type="Container" name="Container2" cloudDestinationProperty="Container2" layout="GridLayout" gridLayoutRows="2" gridLayoutColumns="2" >
+      <component type="Label" name="Label" cloudDestinationProperty="Label" text="SPEED 1" >
+      </component>
+      <component type="TextField" name="speed1TextField" cloudBoundProperty="text" cloudDestinationProperty="TextField" text="2100" constraint="2" >
+      </component>
+      <component type="Label" name="Label1" cloudDestinationProperty="Label1" text="TIME 1" >
+      </component>
+      <component type="TextField" name="time1TextField" cloudBoundProperty="text" cloudDestinationProperty="TextField1" text="15" constraint="2" >
+      </component>
+    </component>
+    <component type="Container" name="Container3" cloudDestinationProperty="Container3" layout="GridLayout" gridLayoutRows="2" gridLayoutColumns="2" >
+      <component type="Label" name="Label" cloudDestinationProperty="Label" text="SPEED 2" >
+      </component>
+      <component type="TextField" name="speed2TextField" cloudBoundProperty="text" cloudDestinationProperty="TextField" text="0" constraint="2" >
+      </component>
+      <component type="Label" name="Label1" cloudDestinationProperty="Label1" text="TIME 2" >
+      </component>
+      <component type="TextField" name="time2TextField" cloudBoundProperty="text" cloudDestinationProperty="TextField1" text="10" constraint="2" >
+      </component>
+    </component>
+    <component type="Container" name="Container4" cloudDestinationProperty="Container4" layout="GridLayout" gridLayoutRows="1" gridLayoutColumns="2" >
+      <component type="Button" name="startButton" cloudDestinationProperty="Button1" text="START" >
+      </component>
+      <component type="Button" name="stopButton" cloudDestinationProperty="Button2" text="STOP" >
+      </component>
+    </component>
+  </component>
+  <component type="Container" name="Container5" cloudDestinationProperty="Container5" layout="GridLayout" gridLayoutRows="2" gridLayoutColumns="1" >
+    <layoutConstraint value="Center" />
+    <component type="Label" name="speedLabel" cloudDestinationProperty="Label2" text="CURRENT SPEED" verticalAlignment="2" textPosition="3" >
+    </component>
+    <component type="Label" name="timeLabel" cloudDestinationProperty="Label3" text="CURRENT TIME" >
+    </component>
+  </component>
+</component>
