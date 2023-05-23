@@ -40,6 +40,8 @@ public class StateMachine extends StateMachineBase {
     // indicates if the sck unit is running
     private boolean sckRunning = false;
     
+    private boolean runRamp = false;
+    
     public StateMachine(String resFile) {
         super(resFile);
         // do not modify, write code in initVars and initialize class members there,
@@ -202,14 +204,17 @@ public class StateMachine extends StateMachineBase {
             findSpeedLabel().setText("0000 RPM");
             findTimeLabel().setText("0000 SEC");
             
+            String acc = findAccTextField().getText();
+            
             String speed1 = findSpeed1TextField().getText();
             int time1 = Integer.parseInt(findTime1TextField().getText());
+            
             String speed2 = findSpeed2TextField().getText();
             int time2 = Integer.parseInt(findTime2TextField().getText());
             
             // start thread to read the speed now
             sckRunning = true;
-            startSCKRunThread(speed1, time1, speed2, time2);
+            startSCKRunThread(speed1, acc, time1, speed2, time2);
         }
     }
     
@@ -222,6 +227,7 @@ public class StateMachine extends StateMachineBase {
     @Override
     protected void onMain_StopButtonAction(Component c, ActionEvent event) {
         sckRunning = false;
+        runRamp = false;
     }
     
     /**
@@ -229,7 +235,7 @@ public class StateMachine extends StateMachineBase {
      * and keep track of the running time
      * 
      */
-    private void startSCKRunThread(final String speed1, final int time1, final String speed2, final int time2) {
+    private void startSCKRunThread(final String speed1, final String acc, final int time1, final String speed2, final int time2) {
         Thread dataReadThread = new Thread("SCK Run Thread") {
             @Override
             public void run() {
@@ -245,7 +251,10 @@ public class StateMachine extends StateMachineBase {
                 
                 // start the motor
                 sckTalkDevice.startMotor();
-                sckTalkDevice.setSpeed(setSpeed);
+                
+                int desiredSpeed = Integer.parseInt(setSpeed);
+                float acceleration = Float.parseFloat(acc);
+                rampToSpeed(desiredSpeed, acceleration, 0, speedLabel, timeLabel);
                 
                 // start the loop to read and display data now
                 while(sckRunning) {
@@ -258,7 +267,13 @@ public class StateMachine extends StateMachineBase {
                     if(currentTime > maxTime) {
                         if(!speed2.equals("0") && runningSpeed1) {
                             setSpeed = speed2;
-                            sckTalkDevice.setSpeed(setSpeed);
+                            
+                            int currentSpeed = Integer.parseInt(speed1);
+                            desiredSpeed = Integer.parseInt(setSpeed);
+                            acceleration = Float.parseFloat(acc);
+                            rampToSpeed(desiredSpeed, acceleration, currentSpeed, speedLabel, timeLabel);
+                            
+                            //sckTalkDevice.setSpeed(setSpeed);
                             
                             currentTime = 0;
                             maxTime = time2;
@@ -276,7 +291,7 @@ public class StateMachine extends StateMachineBase {
                         String speedString = intPadLeftZeroes(speed, 4) + " RPM";
                         updateLabel(speedLabel, speedString);
                         
-                        String timeString = intPadLeftZeroes(currentTime, 4) + " SEC";
+                        String timeString = intPadLeftZeroes(maxTime - currentTime, 4) + " SEC";
                         updateLabel(timeLabel, timeString);                      
                     } catch(NumberFormatException nfe) {}
                     
@@ -295,6 +310,75 @@ public class StateMachine extends StateMachineBase {
             }
         };
         dataReadThread.start();
+    }
+    
+    /**
+     * Accelerate to the current speed
+     * 
+     * @param setSpeed
+     * @param acceleration
+     * @param currentSpeed
+     * @param speedLabel
+     * @param timeLabel
+     * @return 
+     */
+    private int rampToSpeed(int desiredSpeed, float acceleration, int currentSpeed, Label speedLabel, Label timeLabel) {
+        try {
+            runRamp = true;
+
+            // calculate the time to desired rpm in milliseconds
+            int speedDiff = Math.abs(desiredSpeed - currentSpeed);
+            float timeToDesiredSpeed = (speedDiff/acceleration)*1000;
+
+            System.out.println("Time to Desired Speed (ms): " + timeToDesiredSpeed);
+
+            float timeTotal = 0;
+            int cps = 4; // the commands to send per second
+            int delayMS = 1000/cps;
+            if(delayMS < 0) delayMS = 0;
+
+            int step = (int)acceleration/cps;
+            int startSpeed;
+
+            // see if to set the current rpm to the lowest speed the SCK-300 can run at
+            if(currentSpeed == 0) {
+                startSpeed = (step >= 250) ? step : 250;
+            } else {
+                startSpeed = currentSpeed;
+            }
+
+            for (int i = startSpeed; i <= (desiredSpeed + step); i += step) {
+                // check to see if to continue running the ramp program
+                if(!runRamp) break;
+
+                int speed = i;
+                if (speed > desiredSpeed) {
+                    speed = desiredSpeed;
+                }
+
+                //System.out.println("Setting Speed " + speed + " index: " + i + " delay: " + delayMS);
+                sckTalkDevice.setSpeed("" + speed);
+
+                // update the UI
+                if(speedLabel != null) {
+                    String speedString = "*" + intPadLeftZeroes(speed, 4) + " RPM";
+                    updateLabel(speedLabel, speedString);
+
+                    String timeString = "*" + intPadLeftZeroes((int)timeTotal/1000, 4) + " SEC";
+                    updateLabel(timeLabel, timeString); 
+                }
+
+                Thread.sleep(delayMS);
+                timeTotal += delayMS;
+            }
+
+            System.out.println("Time Actually Taken (ms): " + timeTotal);
+
+            return (int)timeTotal/1000;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
     
      /**

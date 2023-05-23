@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<component type="Form" name="Main" cloudDestinationProperty="Main" layout="BorderLayout" borderLayoutAbsoluteCenter="false" title="SCKTalkOne v1.0.5 (3/25/2023)" >
+<component type="Form" name="Main" cloudDestinationProperty="Main" layout="BorderLayout" borderLayoutAbsoluteCenter="false" title="SCKTalkOne v1.1.1 (5/23/2023)" >
   <component type="Container" name="Container1" cloudDestinationProperty="Container1" focusable="true" enabled="true" layout="BoxLayout" boxLayoutAxis="Y" >
     <layoutConstraint value="North" />
     <component type="Picker" name="btPicker" cloudDestinationProperty="Picker" text="Bluetooth Device Address" >
@@ -18,7 +18,11 @@
   </component>
   <component type="Container" name="Container" cloudDestinationProperty="Container" layout="BoxLayout" boxLayoutAxis="Y" >
     <layoutConstraint value="South" />
-    <component type="Container" name="Container2" cloudDestinationProperty="Container2" layout="GridLayout" gridLayoutRows="2" gridLayoutColumns="2" >
+    <component type="Container" name="Container2" cloudDestinationProperty="Container2" layout="GridLayout" gridLayoutRows="3" gridLayoutColumns="2" >
+      <component type="Label" name="Label2" cloudDestinationProperty="Label2" text="ACC. (RPM/s)" >
+      </component>
+      <component type="TextField" name="accTextField" cloudBoundProperty="text" cloudDestinationProperty="TextField" text="200" constraint="2" >
+      </component>
       <component type="Label" name="Label" cloudDestinationProperty="Label" text="SPEED 1" >
       </component>
       <component type="TextField" name="speed1TextField" cloudBoundProperty="text" cloudDestinationProperty="TextField" text="2100" constraint="2" >
@@ -26,6 +30,8 @@
       <component type="Label" name="Label1" cloudDestinationProperty="Label1" text="TIME 1" >
       </component>
       <component type="TextField" name="time1TextField" cloudBoundProperty="text" cloudDestinationProperty="TextField1" text="15" constraint="2" >
+      </component>
+      <component type="SpanLabel" name="SpanLabel" cloudDestinationProperty="SpanLabel" >
       </component>
     </component>
     <component type="Container" name="Container3" cloudDestinationProperty="Container3" layout="GridLayout" gridLayoutRows="2" gridLayoutColumns="2" >

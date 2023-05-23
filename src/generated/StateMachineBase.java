@@ -41,6 +41,7 @@ public abstract class StateMachineBase extends UIBuilder {
         UIBuilder.registerCustomComponent("Label", com.codename1.ui.Label.class);
         UIBuilder.registerCustomComponent("TextField", com.codename1.ui.TextField.class);
         UIBuilder.registerCustomComponent("RadioButton", com.codename1.ui.RadioButton.class);
+        UIBuilder.registerCustomComponent("SpanLabel", com.codename1.components.SpanLabel.class);
         if(loadTheme) {
             if(res == null) {
                 try {
@@ -83,6 +84,7 @@ public abstract class StateMachineBase extends UIBuilder {
         UIBuilder.registerCustomComponent("Label", com.codename1.ui.Label.class);
         UIBuilder.registerCustomComponent("TextField", com.codename1.ui.TextField.class);
         UIBuilder.registerCustomComponent("RadioButton", com.codename1.ui.RadioButton.class);
+        UIBuilder.registerCustomComponent("SpanLabel", com.codename1.components.SpanLabel.class);
         if(loadTheme) {
             if(res == null) {
                 try {
@@ -132,18 +134,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findStartButton(Component root) {
-        return (com.codename1.ui.Button)findByName("startButton", root);
-    }
-
-    public com.codename1.ui.Button findStartButton() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("startButton", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("startButton", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.Label findLabel(Component root) {
         return (com.codename1.ui.Label)findByName("Label", root);
     }
@@ -152,18 +142,6 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("Label", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Label)findByName("Label", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Label findLabel1(Component root) {
-        return (com.codename1.ui.Label)findByName("Label1", root);
-    }
-
-    public com.codename1.ui.Label findLabel1() {
-        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("Label1", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Label)findByName("Label1", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -264,14 +242,14 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.TextField findTime2TextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("time2TextField", root);
+    public com.codename1.ui.TextField findAccTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("accTextField", root);
     }
 
-    public com.codename1.ui.TextField findTime2TextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("time2TextField", Display.getInstance().getCurrent());
+    public com.codename1.ui.TextField findAccTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("accTextField", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("time2TextField", aboutToShowThisContainer);
+            cmp = (com.codename1.ui.TextField)findByName("accTextField", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -296,6 +274,78 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Container cmp = (com.codename1.ui.Container)findByName("Container", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Container)findByName("Container", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findSpeed1TextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("speed1TextField", root);
+    }
+
+    public com.codename1.ui.TextField findSpeed1TextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("speed1TextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("speed1TextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findStartButton(Component root) {
+        return (com.codename1.ui.Button)findByName("startButton", root);
+    }
+
+    public com.codename1.ui.Button findStartButton() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("startButton", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("startButton", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Label findLabel1(Component root) {
+        return (com.codename1.ui.Label)findByName("Label1", root);
+    }
+
+    public com.codename1.ui.Label findLabel1() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("Label1", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Label)findByName("Label1", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Label findLabel2(Component root) {
+        return (com.codename1.ui.Label)findByName("Label2", root);
+    }
+
+    public com.codename1.ui.Label findLabel2() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("Label2", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Label)findByName("Label2", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.components.SpanLabel findSpanLabel(Component root) {
+        return (com.codename1.components.SpanLabel)findByName("SpanLabel", root);
+    }
+
+    public com.codename1.components.SpanLabel findSpanLabel() {
+        com.codename1.components.SpanLabel cmp = (com.codename1.components.SpanLabel)findByName("SpanLabel", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.components.SpanLabel)findByName("SpanLabel", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findTime2TextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("time2TextField", root);
+    }
+
+    public com.codename1.ui.TextField findTime2TextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("time2TextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("time2TextField", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -344,18 +394,6 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("stopButton", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Button)findByName("stopButton", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextField findSpeed1TextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("speed1TextField", root);
-    }
-
-    public com.codename1.ui.TextField findSpeed1TextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("speed1TextField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("speed1TextField", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -530,6 +568,10 @@ public abstract class StateMachineBase extends UIBuilder {
                 onMain_ConsoleTextAreaAction(c, event);
                 return;
             }
+            if("accTextField".equals(c.getName())) {
+                onMain_AccTextFieldAction(c, event);
+                return;
+            }
             if("speed1TextField".equals(c.getName())) {
                 onMain_Speed1TextFieldAction(c, event);
                 return;
@@ -570,6 +612,9 @@ public abstract class StateMachineBase extends UIBuilder {
       }
 
       protected void onMain_ConsoleTextAreaAction(Component c, ActionEvent event) {
+      }
+
+      protected void onMain_AccTextFieldAction(Component c, ActionEvent event) {
       }
 
       protected void onMain_Speed1TextFieldAction(Component c, ActionEvent event) {

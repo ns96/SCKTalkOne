@@ -35,7 +35,7 @@ public class SCKTalkDevice {
     public SCKTalkDevice() {}
     
     /**
-     * Constructor that takes the address of the sck bluetooth adapter
+     * Constructor that takes the address of the sck Bluetooth adapter
      * @param address 
      */
     public SCKTalkDevice(String address) {
