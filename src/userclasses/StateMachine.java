@@ -273,8 +273,6 @@ public class StateMachine extends StateMachineBase {
                             acceleration = Float.parseFloat(acc);
                             rampToSpeed(desiredSpeed, acceleration, currentSpeed, speedLabel, timeLabel);
                             
-                            //sckTalkDevice.setSpeed(setSpeed);
-                            
                             currentTime = 0;
                             maxTime = time2;
                             runningSpeed1 = false;
